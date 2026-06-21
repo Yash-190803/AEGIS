@@ -1,0 +1,9 @@
+node_modules/
+.env
+logs/
+data/reports/
+ml-service/__pycache__/
+ml-service/*.pkl
+ml-service/models/saved_model.pkl
+*.pyc
+*.log
