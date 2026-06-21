@@ -1,0 +1,213 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2026-06-21T00:00:00.000Z",
+  "description": "Baseline metrics for the AEGIS ML scorer. Values model normal enterprise authentication, network, system, application, and firewall activity for local demo scoring.",
+  "featureOrder": [
+    "total_lines",
+    "failed_auth_count",
+    "success_auth_count",
+    "ratio_failed_to_total",
+    "unique_source_ips",
+    "sql_pattern_count",
+    "shell_pattern_count",
+    "requests_per_minute_estimate",
+    "unusual_hour_fraction"
+  ],
+  "recommendationThresholds": {
+    "discardBelow": 0.4,
+    "monitorAtOrAbove": 0.4,
+    "escalateAtOrAbove": 0.7,
+    "minimumEscalationConfidence": 0.8
+  },
+  "confidenceCalibration": {
+    "minimumBatchSizeForHighConfidence": 20,
+    "smallBatchPenalty": 0.15,
+    "knownBadIndicatorBoost": 0.12,
+    "multiSignalAgreementBoost": 0.1,
+    "maxConfidence": 0.99
+  },
+  "knownGoodNetworks": [
+    "10.0.0.0/8",
+    "172.16.0.0/12",
+    "192.168.0.0/16",
+    "198.18.0.0/15"
+  ],
+  "documentationIndicators": {
+    "safeExternalIpRanges": [
+      "192.0.2.0/24",
+      "198.51.100.0/24",
+      "203.0.113.0/24"
+    ],
+    "sampleExternalDomains": [
+      "example.com",
+      "example.net",
+      "example.org"
+    ]
+  },
+  "logTypeBaselines": {
+    "AUTH": {
+      "avgRequestsPerMinute": 12,
+      "p95RequestsPerMinute": 35,
+      "failedAuthPerMinuteMedian": 0.2,
+      "failedAuthPerMinuteP95": 3,
+      "maxExpectedFailedAuthBurst": 6,
+      "successAuthRatioMedian": 0.84,
+      "businessHoursLocal": {
+        "startHour": 7,
+        "endHour": 19
+      },
+      "knownGoodIPs": [
+        "10.0.0.10",
+        "10.0.0.11",
+        "10.0.1.25",
+        "192.168.10.50"
+      ]
+    },
+    "NETWORK": {
+      "avgRequestsPerMinute": 180,
+      "p95RequestsPerMinute": 520,
+      "externalConnectionRatioMedian": 0.22,
+      "dnsQueryBytesMedian": 38,
+      "dnsQueryBytesP95": 96,
+      "largeTransferBytesP95": 104857600,
+      "uniqueDestinationIpsP95": 80,
+      "knownGoodIPs": [
+        "10.0.0.1",
+        "10.0.0.5",
+        "10.0.2.20"
+      ]
+    },
+    "SYSTEM": {
+      "avgEventsPerMinute": 35,
+      "p95EventsPerMinute": 120,
+      "adminCommandPerHourMedian": 4,
+      "serviceRestartPerHourP95": 5,
+      "fileRenamePerMinuteP95": 12,
+      "shadowCopyDeletionExpected": false,
+      "knownGoodProcesses": [
+        "svchost.exe",
+        "sshd",
+        "cron",
+        "systemd",
+        "backup-agent"
+      ]
+    },
+    "APPLICATION": {
+      "avgRequestsPerMinute": 240,
+      "p95RequestsPerMinute": 800,
+      "httpErrorRateMedian": 0.018,
+      "httpErrorRateP95": 0.08,
+      "sqlPatternExpected": false,
+      "shellCommandExpected": false,
+      "normalUserAgentFamilies": [
+        "Chrome",
+        "Edge",
+        "Firefox",
+        "Safari",
+        "curl-internal-healthcheck"
+      ]
+    },
+    "FIREWALL": {
+      "avgEventsPerMinute": 90,
+      "p95EventsPerMinute": 300,
+      "denyRateMedian": 0.06,
+      "denyRateP95": 0.22,
+      "portScanDistinctPortsP95": 12,
+      "unusualPortsAllowed": [
+        22,
+        25,
+        80,
+        443,
+        587,
+        993,
+        3306,
+        3389,
+        5432,
+        8080,
+        8443
+      ]
+    }
+  },
+  "normalFeatureRanges": {
+    "total_lines": {
+      "min": 1,
+      "p50": 25,
+      "p95": 180
+    },
+    "failed_auth_count": {
+      "min": 0,
+      "p50": 1,
+      "p95": 5
+    },
+    "success_auth_count": {
+      "min": 0,
+      "p50": 4,
+      "p95": 30
+    },
+    "ratio_failed_to_total": {
+      "min": 0,
+      "p50": 0.04,
+      "p95": 0.22
+    },
+    "unique_source_ips": {
+      "min": 1,
+      "p50": 4,
+      "p95": 45
+    },
+    "sql_pattern_count": {
+      "min": 0,
+      "p50": 0,
+      "p95": 0
+    },
+    "shell_pattern_count": {
+      "min": 0,
+      "p50": 0,
+      "p95": 1
+    },
+    "requests_per_minute_estimate": {
+      "min": 1,
+      "p50": 60,
+      "p95": 650
+    },
+    "unusual_hour_fraction": {
+      "min": 0,
+      "p50": 0.05,
+      "p95": 0.35
+    }
+  },
+  "syntheticTrainingProfile": {
+    "normalExamples": 1000,
+    "anomalousExamples": 100,
+    "normalDescription": "0-2 failed authentication events, one or two source IPs, business-hour activity, no SQL injection or shell execution patterns.",
+    "anomalousDescription": "20 or more failed authentication events, multiple source IPs, SQL injection strings, shell command artifacts, high request rate, or unusual-hour clustering."
+  },
+  "scenarioExpectations": {
+    "BRUTE_FORCE": {
+      "minimumAnomalyScore": 0.7,
+      "recommendation": "ESCALATE_TO_LLM",
+      "expectedDominantSignals": [
+        "failed_auth_count",
+        "ratio_failed_to_total",
+        "known_bad_ip_flag"
+      ]
+    },
+    "RANSOMWARE_LATERAL": {
+      "minimumAnomalyScore": 0.75,
+      "recommendation": "ESCALATE_TO_LLM",
+      "expectedDominantSignals": [
+        "shell_pattern_count",
+        "unusual_port_flag",
+        "file_rename_rate"
+      ]
+    },
+    "SLOW_EXFILTRATION": {
+      "minimumAnomalyScore": 0.45,
+      "recommendation": "MONITOR",
+      "expectedDominantSignals": [
+        "dns_query_bytes",
+        "repeated_external_domain",
+        "canary_file_access"
+      ]
+    }
+  }
+}

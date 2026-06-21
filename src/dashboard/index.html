@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AEGIS autonomous enterprise security dashboard">
+  <title>AEGIS Security Swarm</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="top-bar">
+      <div class="brand">AEGIS</div>
+      <div id="threatBadge" class="threat-badge threat-low">LOW</div>
+      <div class="top-metrics">
+        <div class="metric"><strong id="activeIncidents">0</strong> active incidents</div>
+        <div class="metric"><strong id="blockedIps">0</strong> blocked IPs</div>
+        <div class="metric"><strong id="uptime">--</strong> uptime</div>
+        <div class="connection"><span id="connectionDot" class="dot"></span><span id="connectionText">disconnected</span></div>
+      </div>
+    </header>
+
+    <section id="hitlPanel" class="hitl-panel" aria-live="polite">
+      <div class="hitl-grid">
+        <div>
+          <div class="hitl-title">&#9888; HUMAN DECISION REQUIRED</div>
+          <div id="hitlIncident">No incident selected</div>
+          <pre id="hitlAction">Waiting for proposed action</pre>
+          <details>
+            <summary>AI reasoning</summary>
+            <p id="hitlReasoning"></p>
+          </details>
+          <p id="hitlBlast"></p>
+        </div>
+        <div class="hitl-actions">
+          <div class="timer-track"><div id="hitlTimerFill" class="timer-fill"></div></div>
+          <div id="hitlCountdown">0 minutes 0 seconds remaining</div>
+          <input id="analystName" type="text" autocomplete="name" placeholder="Analyst name" aria-label="Analyst name">
+          <div class="decision-row">
+            <button id="approveButton" class="approve" type="button">APPROVE</button>
+            <button id="rejectButton" class="reject" type="button">REJECT</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="main-grid">
+      <section class="panel">
+        <h2>Agent Status</h2>
+        <div id="agentGrid" class="agent-grid"></div>
+      </section>
+
+      <section class="panel feed-panel">
+        <h2>Live Event Feed</h2>
+        <div id="eventFeed" class="event-feed">
+          <button id="newEvents" class="new-events" type="button">New events</button>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Incident Queue</h2>
+        <div id="incidentList" class="incident-list"></div>
+      </section>
+    </main>
+
+    <footer class="stats-bar">
+      <div class="stat"><strong id="statIncidents">0</strong> Incidents today</div>
+      <div class="stat"><strong id="statBlocked">0</strong> Blocked today</div>
+      <div class="stat"><strong id="statHitl">0</strong> HITL decisions</div>
+      <div class="stat"><strong id="statHoneypots">0</strong> Active honeypots</div>
+      <div class="stat"><strong id="statAvg">0ms</strong> Avg detect to respond</div>
+      <div class="stat"><strong id="statTokens">0</strong> OpenAI tokens used</div>
+    </footer>
+  </div>
+
+  <div id="eventModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="eventModalTitle">
+    <div class="modal-backdrop" data-close="#eventModal"></div>
+    <div class="modal-content">
+      <button class="close-button" type="button" data-close="#eventModal" aria-label="Close event details">X</button>
+      <h2 id="eventModalTitle">Event Details</h2>
+      <pre id="eventModalBody"></pre>
+    </div>
+  </div>
+
+  <aside id="incidentSidebar" class="sidebar" role="dialog" aria-modal="true" aria-labelledby="incidentSidebarTitle">
+    <div class="sidebar-backdrop" data-close="#incidentSidebar"></div>
+    <div class="sidebar-content">
+      <button class="close-button" type="button" data-close="#incidentSidebar" aria-label="Close incident details">X</button>
+      <h2 id="incidentSidebarTitle">Incident Details</h2>
+      <pre id="incidentSidebarBody"></pre>
+    </div>
+  </aside>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>
