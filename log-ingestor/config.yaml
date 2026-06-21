@@ -1,0 +1,7 @@
+watchDirectory: ../data/logs
+nodeBackendURL: http://localhost:3000
+batchSize: 100
+batchTimeoutMs: 1000
+retryAttempts: 3
+retryBackoffMs: 500
+internalApiKey: ${INTERNAL_API_KEY}

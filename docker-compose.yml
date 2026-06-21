@@ -1,0 +1,101 @@
+services:
+  aegis:
+    image: node:20-bookworm-slim
+    working_dir: /app
+    command: >
+      sh -c "npm install &&
+             npm start"
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: ${NODE_ENV:-development}
+      MOCK_MODE: ${MOCK_MODE:-false}
+      PORT: ${PORT:-3000}
+      ML_SERVICE_URL: http://ml-service:${ML_SERVICE_PORT:-5001}
+      LOG_INGESTOR_WATCH_DIR: /app/data/logs
+    ports:
+      - "${PORT:-3000}:${PORT:-3000}"
+    volumes:
+      - .:/app
+      - aegis_node_modules:/app/node_modules
+      - ./data/logs:/app/data/logs
+      - ./data/reports:/app/data/reports
+      - ./logs:/app/logs
+    depends_on:
+      ml-service:
+        condition: service_healthy
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "node -e \"fetch('http://127.0.0.1:${PORT:-3000}/api/health').then((r)=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))\""
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 20s
+    restart: unless-stopped
+    networks:
+      - aegis-net
+
+  ml-service:
+    image: python:3.11-slim
+    working_dir: /app/ml-service
+    command: >
+      sh -c "pip install --no-cache-dir -r requirements.txt &&
+             python app.py"
+    env_file:
+      - .env
+    environment:
+      ML_SERVICE_HOST: 0.0.0.0
+      ML_SERVICE_PORT: ${ML_SERVICE_PORT:-5001}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+    ports:
+      - "${ML_SERVICE_PORT:-5001}:${ML_SERVICE_PORT:-5001}"
+    volumes:
+      - .:/app
+      - aegis_pip_cache:/root/.cache/pip
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "python -c \"import urllib.request; urllib.request.urlopen('http://127.0.0.1:${ML_SERVICE_PORT:-5001}/health', timeout=3).read()\""
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 30s
+    restart: unless-stopped
+    networks:
+      - aegis-net
+
+  log-ingestor:
+    image: golang:1.22-bookworm
+    network_mode: "service:aegis"
+    working_dir: /app/log-ingestor
+    command: >
+      sh -c "go mod download &&
+             go run . -config config.yaml"
+    env_file:
+      - .env
+    environment:
+      INTERNAL_API_KEY: ${INTERNAL_API_KEY}
+    volumes:
+      - .:/app
+      - ./data/logs:/app/data/logs
+      - aegis_go_mod_cache:/go/pkg/mod
+      - aegis_go_build_cache:/root/.cache/go-build
+    depends_on:
+      aegis:
+        condition: service_healthy
+    restart: unless-stopped
+
+networks:
+  aegis-net:
+    driver: bridge
+
+volumes:
+  aegis_node_modules:
+  aegis_pip_cache:
+  aegis_go_mod_cache:
+  aegis_go_build_cache:
