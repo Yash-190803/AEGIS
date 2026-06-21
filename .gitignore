@@ -1,9 +1,48 @@
-node_modules/
+# Environment and secrets
 .env
+.env.*
+!.env.example
+# Node.js dependencies and logs
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+# Runtime logs and generated reports
 logs/
-data/reports/
-ml-service/__pycache__/
-ml-service/*.pkl
-ml-service/models/saved_model.pkl
-*.pyc
 *.log
+data/logs/*.log
+data/reports/
+# Python caches, virtual environments, and generated ML artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+env/
+ml-service/models/*.pkl
+ml-service/models/*.joblib
+# Go build outputs
+log-ingestor/log-ingestor
+log-ingestor/log-ingestor.exe
+log-ingestor/*.test
+log-ingestor/coverage.out
+# Test and coverage output
+coverage/
+.nyc_output/
+junit.xml
+# Local editor and OS files
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+desktop.ini
+# Temporary files
+tmp/
+temp/
+*.tmp

@@ -1,0 +1,322 @@
+[
+  {
+    "pulseId": "11111111-1111-4111-8111-111111111111",
+    "pulseName": "Cobalt Strike C2 Infrastructure",
+    "indicators": [
+      {
+        "id": "21111111-1111-4111-8111-111111111111",
+        "type": "IPv4",
+        "indicator": "203.0.113.45",
+        "title": "Cobalt Strike C2 Server",
+        "description": "Observed serving Cobalt Strike payloads in APT campaign simulation data",
+        "tags": ["CobaltStrike", "C2", "APT29"],
+        "created": "2026-01-05T10:15:00Z",
+        "expiration": "2026-12-31T23:59:59Z"
+      }
+    ]
+  },
+  {
+    "pulseId": "11111111-1111-4111-8111-111111111112",
+    "pulseName": "Ransomware Staging Infrastructure",
+    "indicators": [
+      {
+        "id": "21111111-1111-4111-8111-111111111112",
+        "type": "IPv4",
+        "indicator": "198.51.100.77",
+        "title": "Ransomware Payload Stager",
+        "description": "Documentation-range host used in ransomware staging telemetry",
+        "tags": ["Ransomware", "Staging", "LockBit"],
+        "created": "2026-01-06T08:00:00Z",
+        "expiration": "2026-12-31T23:59:59Z"
+      }
+    ]
+  },
+  {
+    "pulseId": "11111111-1111-4111-8111-111111111113",
+    "pulseName": "Credential Stuffing Botnet",
+    "indicators": [
+      {
+        "id": "21111111-1111-4111-8111-111111111113",
+        "type": "IPv4",
+        "indicator": "192.0.2.24",
+        "title": "Password Spray Node",
+        "description": "High-volume authentication failures against exposed SSH and VPN portals",
+        "tags": ["CredentialStuffing", "Botnet", "T1110"],
+        "created": "2026-01-07T11:45:00Z",
+        "expiration": "2026-12-31T23:59:59Z"
+      }
+    ]
+  },
+  {
+    "pulseId": "11111111-1111-4111-8111-111111111114",
+    "pulseName": "SQL Injection Scanning Cluster",
+    "indicators": [
+      {
+        "id": "21111111-1111-4111-8111-111111111114",
+        "type": "IPv4",
+        "indicator": "203.0.113.88",
+        "title": "Automated SQLi Scanner",
+        "description": "Repeated UNION SELECT and boolean-based injection probes",
+        "tags": ["SQLInjection", "Scanner", "T1190"],
+        "created": "2026-01-08T16:20:00Z",
+        "expiration": "2026-12-31T23:59:59Z"
+      }
+    ]
+  },
+  {
+    "pulseId": "11111111-1111-4111-8111-111111111115",
+    "pulseName": "DNS Exfiltration Relay",
+    "indicators": [
+      {
+        "id": "21111111-1111-4111-8111-111111111115",
+        "type": "IPv4",
+        "indicator": "203.0.113.99",
+        "title": "DNS Tunnel Relay",
+        "description": "Consistent encoded DNS queries observed in exfiltration simulation",
+        "tags": ["Exfiltration", "DNSTunnel", "T1048"],
+        "created": "2026-01-09T09:30:00Z",
+        "expiration": "2026-12-31T23:59:59Z"
+      }
+    ]
+  },
+  {
+    "pulseId": "11111111-1111-4111-8111-111111111116",
+    "pulseName": "Initial Access Broker Proxy",
+    "indicators": [
+      {
+        "id": "21111111-1111-4111-8111-111111111116",
+        "type": "IPv4",
+        "indicator": "198.51.100.12",
+        "title": "Broker Proxy Endpoint",
+        "description": "Proxy endpoint associated with phishing landing pages and credential resale",
+        "tags": ["InitialAccessBroker", "Phishing", "T1566"],
+        "created": "2026-01-10T12:10:00Z",
+        "expiration": "2026-12-31T23:59:59Z"
+      }
+    ]
+  },
+  {
+    "pulseId": "11111111-1111-4111-8111-111111111117",
+    "pulseName": "Remote Management Abuse",
+    "indicators": [
+      {
+        "id": "21111111-1111-4111-8111-111111111117",
+        "type": "IPv4",
+        "indicator": "192.0.2.67",
+        "title": "RDP Brute Force Source",
+        "description": "Multiple RDP credential attempts followed by anomalous workstation pivoting",
+        "tags": ["RDP", "BruteForce", "T1021"],
+        "created": "2026-01-11T13:50:00Z",
+        "expiration": "2026-12-31T23:59:59Z"
+      }
+    ]
+  },
+  {
+    "pulseId": "11111111-1111-4111-8111-111111111118",
+    "pulseName": "Web Shell Control Nodes",
+    "indicators": [
+      {
+        "id": "21111111-1111-4111-8111-111111111118",
+        "type": "IPv4",
+        "indicator": "203.0.113.120",
+        "title": "Web Shell Operator Host",
+        "description": "Command traffic associated with public-facing application exploitation",
+        "tags": ["WebShell", "C2", "T1059"],
+        "created": "2026-01-12T07:25:00Z",
+        "expiration": "2026-12-31T23:59:59Z"
+      }
+    ]
+  },
+  {
+    "pulseId": "11111111-1111-4111-8111-111111111119",
+    "pulseName": "Malware Downloader Nodes",
+    "indicators": [
+      {
+        "id": "21111111-1111-4111-8111-111111111119",
+        "type": "IPv4",
+        "indicator": "198.51.100.33",
+        "title": "Payload Download Host",
+        "description": "Serves second-stage payloads over HTTP in controlled telemetry",
+        "tags": ["Downloader", "IngressToolTransfer", "T1105"],
+        "created": "2026-01-13T15:05:00Z",
+        "expiration": "2026-12-31T23:59:59Z"
+      }
+    ]
+  },
+  {
+    "pulseId": "11111111-1111-4111-8111-111111111120",
+    "pulseName": "Credential Dumping Toolkit",
+    "indicators": [
+      {
+        "id": "21111111-1111-4111-8111-111111111120",
+        "type": "IPv4",
+        "indicator": "192.0.2.89",
+        "title": "Credential Dumping Operator",
+        "description": "Network callback after credential access tooling execution",
+        "tags": ["CredentialDumping", "Mimikatz", "T1003"],
+        "created": "2026-01-14T06:40:00Z",
+        "expiration": "2026-12-31T23:59:59Z"
+      }
+    ]
+  },
+  {
+    "pulseId": "11111111-1111-4111-8111-111111111121",
+    "pulseName": "APT Command Relay",
+    "indicators": [
+      {
+        "id": "21111111-1111-4111-8111-111111111121",
+        "type": "IPv4",
+        "indicator": "203.0.113.201",
+        "title": "APT Relay Host",
+        "description": "Long-lived beaconing pattern consistent with targeted intrusion tooling",
+        "tags": ["APT41", "C2", "Beacon"],
+        "created": "2026-01-15T17:55:00Z",
+        "expiration": "2026-12-31T23:59:59Z"
+      }
+    ]
+  },
+  {
+    "pulseId": "11111111-1111-4111-8111-111111111122",
+    "pulseName": "Cloud Token Abuse",
+    "indicators": [
+      {
+        "id": "21111111-1111-4111-8111-111111111122",
+        "type": "IPv4",
+        "indicator": "198.51.100.144",
+        "title": "Cloud API Abuse Source",
+        "description": "Suspicious cloud API calls after token exposure in canary telemetry",
+        "tags": ["Cloud", "TokenTheft", "T1078"],
+        "created": "2026-01-16T20:00:00Z",
+        "expiration": "2026-12-31T23:59:59Z"
+      }
+    ]
+  },
+  {
+    "pulseId": "11111111-1111-4111-8111-111111111123",
+    "pulseName": "Protocol Tunneling Relay",
+    "indicators": [
+      {
+        "id": "21111111-1111-4111-8111-111111111123",
+        "type": "IPv4",
+        "indicator": "192.0.2.150",
+        "title": "Protocol Tunnel Endpoint",
+        "description": "Unusual long-lived outbound tunnel behavior in network simulation",
+        "tags": ["ProtocolTunneling", "T1572", "Exfiltration"],
+        "created": "2026-01-17T18:35:00Z",
+        "expiration": "2026-12-31T23:59:59Z"
+      }
+    ]
+  },
+  {
+    "pulseId": "11111111-1111-4111-8111-111111111124",
+    "pulseName": "Defense Evasion Infrastructure",
+    "indicators": [
+      {
+        "id": "21111111-1111-4111-8111-111111111124",
+        "type": "IPv4",
+        "indicator": "203.0.113.214",
+        "title": "Log Clearing Operator Host",
+        "description": "Administrative command patterns associated with log deletion and service tampering",
+        "tags": ["DefenseEvasion", "T1070", "T1562"],
+        "created": "2026-01-18T04:15:00Z",
+        "expiration": "2026-12-31T23:59:59Z"
+      }
+    ]
+  },
+  {
+    "pulseId": "11111111-1111-4111-8111-111111111125",
+    "pulseName": "Network Discovery Scanner",
+    "indicators": [
+      {
+        "id": "21111111-1111-4111-8111-111111111125",
+        "type": "IPv4",
+        "indicator": "198.51.100.201",
+        "title": "Internal Recon Scanner",
+        "description": "Rapid service discovery activity against segmented networks",
+        "tags": ["Reconnaissance", "ServiceScanning", "T1046"],
+        "created": "2026-01-19T22:10:00Z",
+        "expiration": "2026-12-31T23:59:59Z"
+      }
+    ]
+  },
+  {
+    "pulseId": "11111111-1111-4111-8111-111111111126",
+    "pulseName": "Exfiltration Over Web Service",
+    "indicators": [
+      {
+        "id": "21111111-1111-4111-8111-111111111126",
+        "type": "IPv4",
+        "indicator": "192.0.2.211",
+        "title": "File Upload Drop Point",
+        "description": "Large outbound uploads to documentation-range web endpoint",
+        "tags": ["Exfiltration", "WebService", "T1567"],
+        "created": "2026-01-20T14:10:00Z",
+        "expiration": "2026-12-31T23:59:59Z"
+      }
+    ]
+  },
+  {
+    "pulseId": "11111111-1111-4111-8111-111111111127",
+    "pulseName": "Privilege Escalation Operator",
+    "indicators": [
+      {
+        "id": "21111111-1111-4111-8111-111111111127",
+        "type": "IPv4",
+        "indicator": "203.0.113.33",
+        "title": "Exploit Operator Callback",
+        "description": "Callback host after local privilege escalation exploit execution",
+        "tags": ["PrivilegeEscalation", "T1548", "Exploit"],
+        "created": "2026-01-21T10:45:00Z",
+        "expiration": "2026-12-31T23:59:59Z"
+      }
+    ]
+  },
+  {
+    "pulseId": "11111111-1111-4111-8111-111111111128",
+    "pulseName": "Scheduled Task Persistence",
+    "indicators": [
+      {
+        "id": "21111111-1111-4111-8111-111111111128",
+        "type": "IPv4",
+        "indicator": "198.51.100.222",
+        "title": "Persistence Callback",
+        "description": "Periodic callbacks after scheduled task creation",
+        "tags": ["Persistence", "ScheduledTask", "T1053"],
+        "created": "2026-01-22T03:20:00Z",
+        "expiration": "2026-12-31T23:59:59Z"
+      }
+    ]
+  },
+  {
+    "pulseId": "11111111-1111-4111-8111-111111111129",
+    "pulseName": "Phishing Redirect Infrastructure",
+    "indicators": [
+      {
+        "id": "21111111-1111-4111-8111-111111111129",
+        "type": "IPv4",
+        "indicator": "192.0.2.44",
+        "title": "Credential Harvest Redirect",
+        "description": "Redirect endpoint used by simulated phishing lure campaigns",
+        "tags": ["Phishing", "CredentialHarvesting", "T1566"],
+        "created": "2026-01-23T09:05:00Z",
+        "expiration": "2026-12-31T23:59:59Z"
+      }
+    ]
+  },
+  {
+    "pulseId": "11111111-1111-4111-8111-111111111130",
+    "pulseName": "Backup Destruction Coordinator",
+    "indicators": [
+      {
+        "id": "21111111-1111-4111-8111-111111111130",
+        "type": "IPv4",
+        "indicator": "203.0.113.250",
+        "title": "Backup Deletion Coordinator",
+        "description": "Operator host linked to backup-service termination before encryption events",
+        "tags": ["Ransomware", "BackupDeletion", "T1490"],
+        "created": "2026-01-24T19:30:00Z",
+        "expiration": "2026-12-31T23:59:59Z"
+      }
+    ]
+  }
+]

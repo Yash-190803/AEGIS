@@ -1,0 +1,279 @@
+{
+  "techniques": [
+    {
+      "id": "T1110",
+      "name": "Brute Force",
+      "tactic": "Credential Access",
+      "tacticId": "TA0006",
+      "description": "Adversaries may use repeated login attempts, password spraying, or credential stuffing to gain access to accounts.",
+      "detection": "Monitor authentication logs for excessive failures from the same source, failures across many accounts, and success immediately after repeated failures.",
+      "mitigation": "Enforce multifactor authentication, account lockout policies, strong password controls, and adaptive throttling.",
+      "subtechniques": ["T1110.001", "T1110.003"],
+      "dataSources": ["Authentication logs", "Windows Event Logs", "VPN logs"]
+    },
+    {
+      "id": "T1059",
+      "name": "Command and Scripting Interpreter",
+      "tactic": "Execution",
+      "tacticId": "TA0002",
+      "description": "Adversaries may abuse command and scripting interpreters to execute commands, scripts, or payloads.",
+      "detection": "Monitor shell, PowerShell, cmd.exe, Python, and bash execution with suspicious arguments or encoded commands.",
+      "mitigation": "Restrict script execution, enforce application control, log command-line arguments, and disable unused interpreters.",
+      "subtechniques": ["T1059.001", "T1059.003", "T1059.004"],
+      "dataSources": ["Process logs", "Command execution logs", "Endpoint telemetry"]
+    },
+    {
+      "id": "T1078",
+      "name": "Valid Accounts",
+      "tactic": "Defense Evasion",
+      "tacticId": "TA0005",
+      "description": "Adversaries may obtain and abuse valid credentials to access systems and evade detection.",
+      "detection": "Monitor unusual successful logins, impossible travel, new source locations, and success following many failed attempts.",
+      "mitigation": "Use multifactor authentication, credential rotation, least privilege, and user behavior analytics.",
+      "subtechniques": ["T1078.001", "T1078.002", "T1078.003"],
+      "dataSources": ["Authentication logs", "Identity provider logs", "Cloud audit logs"]
+    },
+    {
+      "id": "T1021",
+      "name": "Remote Services",
+      "tactic": "Lateral Movement",
+      "tacticId": "TA0008",
+      "description": "Adversaries may use valid credentials or exploitation to move laterally through remote services such as SMB, RDP, SSH, or WinRM.",
+      "detection": "Monitor internal-to-internal remote service connections, workstation-to-workstation SMB/RDP, and unusual admin logons.",
+      "mitigation": "Segment networks, restrict remote services, enforce privileged access management, and monitor administrative protocols.",
+      "subtechniques": ["T1021.001", "T1021.002", "T1021.004", "T1021.006"],
+      "dataSources": ["Network flow logs", "Authentication logs", "Windows Event Logs"]
+    },
+    {
+      "id": "T1190",
+      "name": "Exploit Public-Facing Application",
+      "tactic": "Initial Access",
+      "tacticId": "TA0001",
+      "description": "Adversaries may exploit internet-facing applications to gain initial access.",
+      "detection": "Monitor web logs for exploit payloads, abnormal HTTP errors, web shell creation, and application process child execution.",
+      "mitigation": "Patch exposed applications, use WAF rules, minimize internet exposure, and run vulnerability scanning.",
+      "subtechniques": [],
+      "dataSources": ["Web server logs", "Application logs", "Process logs"]
+    },
+    {
+      "id": "T1566",
+      "name": "Phishing",
+      "tactic": "Initial Access",
+      "tacticId": "TA0001",
+      "description": "Adversaries may send phishing messages to trick users into revealing credentials or executing payloads.",
+      "detection": "Monitor email security events, suspicious links, attachment execution, and credential submissions after email delivery.",
+      "mitigation": "Use email filtering, user training, attachment sandboxing, and phishing-resistant authentication.",
+      "subtechniques": ["T1566.001", "T1566.002", "T1566.003"],
+      "dataSources": ["Email gateway logs", "Endpoint telemetry", "Web proxy logs"]
+    },
+    {
+      "id": "T1486",
+      "name": "Data Encrypted for Impact",
+      "tactic": "Impact",
+      "tacticId": "TA0040",
+      "description": "Adversaries may encrypt data to disrupt availability and extort victims.",
+      "detection": "Monitor mass file rename/write activity, encryption extensions, shadow copy deletion, and backup service termination.",
+      "mitigation": "Maintain offline backups, restrict write permissions, enable behavior-based ransomware detection, and segment critical storage.",
+      "subtechniques": [],
+      "dataSources": ["File access logs", "Process logs", "Endpoint telemetry"]
+    },
+    {
+      "id": "T1041",
+      "name": "Exfiltration Over C2 Channel",
+      "tactic": "Exfiltration",
+      "tacticId": "TA0010",
+      "description": "Adversaries may steal data by sending it over an existing command-and-control channel.",
+      "detection": "Monitor unusual outbound traffic volumes, long-lived sessions, and data transfers to suspicious destinations.",
+      "mitigation": "Inspect egress traffic, restrict outbound destinations, and alert on anomalous transfer patterns.",
+      "subtechniques": [],
+      "dataSources": ["Network flow logs", "Proxy logs", "Firewall logs"]
+    },
+    {
+      "id": "T1071",
+      "name": "Application Layer Protocol",
+      "tactic": "Command and Control",
+      "tacticId": "TA0011",
+      "description": "Adversaries may communicate using common application layer protocols such as HTTP, DNS, or mail protocols.",
+      "detection": "Monitor unusual protocol usage, suspicious beaconing cadence, and encoded payloads in protocol fields.",
+      "mitigation": "Use proxy inspection, DNS filtering, allowlists, and egress monitoring.",
+      "subtechniques": ["T1071.001", "T1071.004"],
+      "dataSources": ["DNS logs", "Proxy logs", "Network traffic"]
+    },
+    {
+      "id": "T1055",
+      "name": "Process Injection",
+      "tactic": "Defense Evasion",
+      "tacticId": "TA0005",
+      "description": "Adversaries may inject code into processes to evade defenses or gain privileges.",
+      "detection": "Monitor suspicious cross-process memory access, unusual child processes, and endpoint injection alerts.",
+      "mitigation": "Enable exploit protection, restrict debug privileges, and use endpoint detection controls.",
+      "subtechniques": ["T1055.001", "T1055.002", "T1055.012"],
+      "dataSources": ["Endpoint telemetry", "Process logs", "Memory analysis"]
+    },
+    {
+      "id": "T1003",
+      "name": "OS Credential Dumping",
+      "tactic": "Credential Access",
+      "tacticId": "TA0006",
+      "description": "Adversaries may dump credentials from operating system stores, memory, or registry locations.",
+      "detection": "Monitor LSASS access, credential dumping tool signatures, and suspicious reads of credential stores.",
+      "mitigation": "Enable credential protection, limit privileged access, and block known dumping tools.",
+      "subtechniques": ["T1003.001", "T1003.002", "T1003.003"],
+      "dataSources": ["Process logs", "Endpoint telemetry", "Windows Event Logs"]
+    },
+    {
+      "id": "T1136",
+      "name": "Create Account",
+      "tactic": "Persistence",
+      "tacticId": "TA0003",
+      "description": "Adversaries may create local, domain, or cloud accounts to maintain access.",
+      "detection": "Monitor account creation events, unexpected privileged group membership, and new service accounts.",
+      "mitigation": "Restrict account creation permissions, alert on privileged account changes, and review dormant accounts.",
+      "subtechniques": ["T1136.001", "T1136.002", "T1136.003"],
+      "dataSources": ["Directory logs", "Cloud audit logs", "Windows Event Logs"]
+    },
+    {
+      "id": "T1548",
+      "name": "Abuse Elevation Control Mechanism",
+      "tactic": "Privilege Escalation",
+      "tacticId": "TA0004",
+      "description": "Adversaries may bypass or abuse privilege controls such as sudo, UAC, or SUID binaries.",
+      "detection": "Monitor sudo misuse, UAC bypass patterns, SUID execution, and privilege changes by non-admin users.",
+      "mitigation": "Apply least privilege, restrict sudo rules, patch local privilege escalation bugs, and harden UAC policies.",
+      "subtechniques": ["T1548.001", "T1548.002", "T1548.003"],
+      "dataSources": ["Authentication logs", "Process logs", "Endpoint telemetry"]
+    },
+    {
+      "id": "T1053",
+      "name": "Scheduled Task/Job",
+      "tactic": "Persistence",
+      "tacticId": "TA0003",
+      "description": "Adversaries may create scheduled tasks or jobs to execute malicious code persistently.",
+      "detection": "Monitor new scheduled tasks, cron changes, unusual run times, and tasks executing from temporary directories.",
+      "mitigation": "Restrict task creation, review scheduled jobs, and alert on suspicious task actions.",
+      "subtechniques": ["T1053.003", "T1053.005", "T1053.006"],
+      "dataSources": ["Process logs", "Task scheduler logs", "File modification logs"]
+    },
+    {
+      "id": "T1562",
+      "name": "Impair Defenses",
+      "tactic": "Defense Evasion",
+      "tacticId": "TA0005",
+      "description": "Adversaries may disable or modify security tools, logging, or recovery services.",
+      "detection": "Monitor service stop events, tamper protection alerts, logging configuration changes, and security tool exclusion updates.",
+      "mitigation": "Enable tamper protection, restrict administrative rights, and centralize immutable logging.",
+      "subtechniques": ["T1562.001", "T1562.002", "T1562.004"],
+      "dataSources": ["Service logs", "Security product logs", "Endpoint telemetry"]
+    },
+    {
+      "id": "T1070",
+      "name": "Indicator Removal",
+      "tactic": "Defense Evasion",
+      "tacticId": "TA0005",
+      "description": "Adversaries may delete or modify logs, files, or artifacts to hide activity.",
+      "detection": "Monitor log clearing events, suspicious file deletion, timestamp tampering, and audit policy changes.",
+      "mitigation": "Forward logs off-host, restrict log deletion permissions, and enable file integrity monitoring.",
+      "subtechniques": ["T1070.001", "T1070.004", "T1070.006"],
+      "dataSources": ["Audit logs", "File access logs", "Windows Event Logs"]
+    },
+    {
+      "id": "T1105",
+      "name": "Ingress Tool Transfer",
+      "tactic": "Command and Control",
+      "tacticId": "TA0011",
+      "description": "Adversaries may transfer tools or payloads into a compromised environment.",
+      "detection": "Monitor curl, wget, PowerShell downloads, unusual outbound requests, and newly created executables.",
+      "mitigation": "Restrict outbound access, inspect downloads, and block untrusted execution paths.",
+      "subtechniques": [],
+      "dataSources": ["Proxy logs", "Process logs", "File creation logs"]
+    },
+    {
+      "id": "T1083",
+      "name": "File and Directory Discovery",
+      "tactic": "Discovery",
+      "tacticId": "TA0007",
+      "description": "Adversaries may enumerate files and directories to identify valuable data.",
+      "detection": "Monitor recursive directory listings, access to sensitive shares, and unusual file browsing patterns.",
+      "mitigation": "Limit file permissions, hide sensitive shares, and monitor access to high-value directories.",
+      "subtechniques": [],
+      "dataSources": ["File access logs", "Command execution logs", "Endpoint telemetry"]
+    },
+    {
+      "id": "T1082",
+      "name": "System Information Discovery",
+      "tactic": "Discovery",
+      "tacticId": "TA0007",
+      "description": "Adversaries may collect system information such as OS version, hostname, users, or hardware details.",
+      "detection": "Monitor commands such as systeminfo, uname, hostname, whoami, and environment enumeration.",
+      "mitigation": "Limit command execution, reduce exposed system metadata, and alert on unusual discovery chains.",
+      "subtechniques": [],
+      "dataSources": ["Process logs", "Command execution logs", "Endpoint telemetry"]
+    },
+    {
+      "id": "T1018",
+      "name": "Remote System Discovery",
+      "tactic": "Discovery",
+      "tacticId": "TA0007",
+      "description": "Adversaries may enumerate remote hosts and domain systems to plan lateral movement.",
+      "detection": "Monitor net view, ping sweeps, LDAP queries, ARP scans, and internal service enumeration.",
+      "mitigation": "Segment networks, restrict directory queries, and alert on discovery bursts.",
+      "subtechniques": [],
+      "dataSources": ["Network flow logs", "Directory logs", "Process logs"]
+    },
+    {
+      "id": "T1087",
+      "name": "Account Discovery",
+      "tactic": "Discovery",
+      "tacticId": "TA0007",
+      "description": "Adversaries may enumerate accounts to identify targets for credential access or privilege escalation.",
+      "detection": "Monitor net user, LDAP account enumeration, cloud identity listing, and group membership queries.",
+      "mitigation": "Restrict directory enumeration, monitor identity provider APIs, and apply least privilege.",
+      "subtechniques": ["T1087.001", "T1087.002", "T1087.004"],
+      "dataSources": ["Directory logs", "Command execution logs", "Cloud audit logs"]
+    },
+    {
+      "id": "T1046",
+      "name": "Network Service Scanning",
+      "tactic": "Discovery",
+      "tacticId": "TA0007",
+      "description": "Adversaries may scan hosts for open ports and services to identify attack paths.",
+      "detection": "Monitor connection attempts across many ports or hosts, nmap signatures, and rapid service enumeration.",
+      "mitigation": "Segment networks, restrict unnecessary services, and deploy network intrusion detection.",
+      "subtechniques": [],
+      "dataSources": ["Network flow logs", "Firewall logs", "IDS logs"]
+    },
+    {
+      "id": "T1572",
+      "name": "Protocol Tunneling",
+      "tactic": "Command and Control",
+      "tacticId": "TA0011",
+      "description": "Adversaries may tunnel one protocol through another to evade network controls.",
+      "detection": "Monitor long-lived sessions, unusual protocol nesting, and atypical traffic volume for approved protocols.",
+      "mitigation": "Inspect egress traffic, restrict tunneling tools, and enforce protocol-aware filtering.",
+      "subtechniques": [],
+      "dataSources": ["Network traffic", "Proxy logs", "Firewall logs"]
+    },
+    {
+      "id": "T1048",
+      "name": "Exfiltration Over Alternative Protocol",
+      "tactic": "Exfiltration",
+      "tacticId": "TA0010",
+      "description": "Adversaries may exfiltrate data over protocols other than the main command-and-control channel, such as DNS or FTP.",
+      "detection": "Monitor DNS queries with large payloads, uncommon outbound protocols, and repeated small transfers to one destination.",
+      "mitigation": "Limit allowed egress protocols, inspect DNS, and alert on abnormal transfer patterns.",
+      "subtechniques": ["T1048.001", "T1048.002", "T1048.003"],
+      "dataSources": ["DNS logs", "Network flow logs", "Proxy logs"]
+    },
+    {
+      "id": "T1567",
+      "name": "Exfiltration Over Web Service",
+      "tactic": "Exfiltration",
+      "tacticId": "TA0010",
+      "description": "Adversaries may exfiltrate data to cloud storage or web services that blend with normal traffic.",
+      "detection": "Monitor unusual uploads to web services, new OAuth app grants, and large transfers to unsanctioned destinations.",
+      "mitigation": "Use data loss prevention, restrict unsanctioned cloud storage, and monitor cloud application access.",
+      "subtechniques": ["T1567.001", "T1567.002"],
+      "dataSources": ["Proxy logs", "Cloud audit logs", "Network flow logs"]
+    }
+  ]
+}
