@@ -22,18 +22,18 @@ import (
 )
 
 const (
-	lineBufferSize         = 10000
-	shutdownTimeout        = 30 * time.Second
-	newFileReadyTimeout    = 2 * time.Second
-	defaultBatchSize       = 100
-	defaultBatchTimeoutMs  = 1000
-	defaultRetryAttempts   = 3
-	defaultRetryBackoffMs  = 500
-	minimumRetryBackoffMs  = 100
-	maximumBatchSize       = 5000
-	maximumBatchTimeoutMs  = 60000
-	maximumRetryAttempts   = 10
-	maximumRetryBackoffMs  = 30000
+	lineBufferSize        = 10000
+	shutdownTimeout       = 30 * time.Second
+	newFileReadyTimeout   = 2 * time.Second
+	defaultBatchSize      = 100
+	defaultBatchTimeoutMs = 1000
+	defaultRetryAttempts  = 3
+	defaultRetryBackoffMs = 500
+	minimumRetryBackoffMs = 100
+	maximumBatchSize      = 5000
+	maximumBatchTimeoutMs = 60000
+	maximumRetryAttempts  = 10
+	maximumRetryBackoffMs = 30000
 )
 
 type ingestorConfig struct {
