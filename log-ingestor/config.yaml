@@ -1,7 +1,8 @@
-watchDirectory: ../data/logs
-nodeBackendURL: http://localhost:3000
-batchSize: 100
-batchTimeoutMs: 1000
-retryAttempts: 3
-retryBackoffMs: 500
-internalApiKey: ${INTERNAL_API_KEY}
+watch_directory: "../data/logs"
+node_backend_url: "http://localhost:3000/api/internal/log-batch"
+batch_size: 100
+batch_timeout_ms: 2000
+retry_attempts: 3
+retry_backoff_ms: 500
+log_level: "info"
+internal_api_key: "aegis-internal-key-dev"
