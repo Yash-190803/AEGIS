@@ -37,13 +37,13 @@ const (
 )
 
 type ingestorConfig struct {
-	WatchDirectory string `yaml:"watchDirectory"`
-	NodeBackendURL string `yaml:"nodeBackendURL"`
-	BatchSize      int    `yaml:"batchSize"`
-	BatchTimeoutMs int    `yaml:"batchTimeoutMs"`
-	RetryAttempts  int    `yaml:"retryAttempts"`
-	RetryBackoffMs int    `yaml:"retryBackoffMs"`
-	InternalAPIKey string `yaml:"internalApiKey"`
+	WatchDirectory string `yaml:"watch_directory"`
+	NodeBackendURL string `yaml:"node_backend_url"`
+	BatchSize      int    `yaml:"batch_size"`
+	BatchTimeoutMs int    `yaml:"batch_timeout_ms"`
+	RetryAttempts  int    `yaml:"retry_attempts"`
+	RetryBackoffMs int    `yaml:"retry_backoff_ms"`
+	InternalAPIKey string `yaml:"internal_api_key"`
 }
 
 func main() {
