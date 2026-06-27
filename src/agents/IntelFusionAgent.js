@@ -186,8 +186,15 @@ class IntelFusionAgent extends AgentBase {
 
   async enrichIncident(message) {
     try {
-      this.memory.log(this.name, 'ENRICH_INCIDENT_PRE', { incidentId: message.incidentId, messageId: message.messageId });
       const incidentId = message.incidentId || (message.data && message.data.incidentId);
+      this.memory.log(this.name, 'ENRICH_INCIDENT_PRE', { incidentId, messageId: message.messageId, eventType: message.eventType });
+      if (!incidentId && message.eventType === EVENTS.THREAT_DETECTED) {
+        this.memory.log(this.name, 'ENRICH_INCIDENT_DEFERRED', {
+          messageId: message.messageId,
+          reason: 'Raw threat detection has not been persisted by Orchestrator yet.'
+        });
+        return;
+      }
       const incident = this.memory.getIncident(incidentId);
       if (!incident) throw new Error(`Incident not found: ${incidentId}`);
 
@@ -240,7 +247,8 @@ class IntelFusionAgent extends AgentBase {
       }, incident.id, updatedIncident.confidence);
       this.memory.log(this.name, 'ENRICH_INCIDENT_POST', { incidentId: incident.id, feedMatches: feedMatches.length, severity });
     } catch (error) {
-      this.memory.log(this.name, 'ENRICH_INCIDENT_ERROR', { incidentId: message.incidentId, error: error.message });
+      const incidentId = message.incidentId || (message.data && message.data.incidentId) || null;
+      this.memory.log(this.name, 'ENRICH_INCIDENT_ERROR', { incidentId, error: error.message });
       throw new Error(`enrichIncident failed: ${error.message}`);
     }
   }
